@@ -18,6 +18,11 @@ El sistema está diseñado para optimizar el registro y control de ingresos, egr
 
 🔗 **[Prueba la aplicación en vivo aquí](https://contabilidad-frontend.onrender.com)**
 
+### 💡 Nota de Arquitectura y Seguridad
+El código fuente original de esta aplicación está resguardado en un repositorio privado por razones de confidencialidad y protección de propiedad intelectual. **Este repositorio público contiene únicamente los archivos estáticos compilados y ofuscados de la aplicación (carpeta `chunks/`), la licencia y esta documentación.** 
+
+La ofuscación y minificación del bundle (código compilado) se implementan como una medida disuasoria habitual para dificultar la ingeniería inversa, pero no constituyen una garantía criptográfica absoluta. Las credenciales, secretos y la lógica sensible residen exclusivamente en el backend. Este repositorio no es reproducible, ya que no incluye el código fuente ni los archivos de configuración necesarios para su compilación.
+
 ### 🚀 Estado del Proyecto: En Desarrollo
 
 Actualmente, el proyecto se encuentra en fase de desarrollo y estabilización, con una arquitectura orientada a la separación de responsabilidades entre el frontend y los servicios del sistema. La solución busca ofrecer una experiencia de usuario intuitiva, segura y adaptable a las necesidades de la gestión contable.
@@ -29,10 +34,6 @@ Actualmente, el proyecto se encuentra en fase de desarrollo y estabilización, c
 - **Lenguaje de programación:** TypeScript, con tipado estático para mejorar la mantenibilidad y reducir errores.
 - **Estilos e interfaz:** Diseño web moderno y adaptable a diferentes dispositivos.
 - **Control de versiones:** Git y GitHub para el seguimiento de cambios y la colaboración en el desarrollo.
-
-### 🔗 Repositorio del Backend
-Para revisar la lógica del servidor, la gestión de la base de datos PostgreSQL y los endpoints que consume esta interfaz, accede al repositorio del servidor:
-* ⚙️ **Backend (Node.js):** [Enlace al repositorio de Node.js](https://github.com/code-with-infinite/contabilidad-backend.git)
 
 ### 💡 Características Principales
 
@@ -58,71 +59,34 @@ Esta organización facilita:
 
 ### ⚙️ Configuración y Seguridad
 
-- **🔐 Variables de Entorno:** Uso de archivos `.env.local` para configurar las variables necesarias en el entorno de desarrollo.
+- **🔐 Variables de Entorno:** Uso de archivos `.env.local` para configurar las variables necesarias en el entorno de desarrollo privado. En Next.js, las variables expuestas al cliente (prefijo `NEXT_PUBLIC_`) son públicas, por lo que no deben contener secretos. Las credenciales reales se gestionan de forma segura en el backend.
 - **🛡️ Protección de Credenciales:** Exclusión de archivos con información sensible mediante `.gitignore`.
 - **🔗 Integración con el Backend:** Configuración de las direcciones de las API y los servicios según el entorno de ejecución.
-- **📦 Gestión de Dependencias:** Uso de npm y del archivo de bloqueo de dependencias para facilitar instalaciones consistentes.
+- **📦 Gestión de Dependencias:** Uso de npm y del archivo de bloqueo de dependencias para facilitar instalaciones consistentes en el entorno de desarrollo privado.
 - **🌿 Control de Versiones:** Uso de Git y GitHub para mantener un historial organizado de los cambios.
 
-> **Importante:** Las credenciales, claves privadas, contraseñas y archivos de configuración sensibles no deben publicarse en repositorios públicos. La configuración de producción debe administrarse mediante variables de entorno seguras.
+> **Importante:** Las credenciales, claves privadas, contraseñas y archivos de configuración sensibles no deben publicarse en repositorios públicos. La configuración de producción debe administrarse mediante variables de entorno seguras a nivel de servidor.
 
-### ▶️ Instalación y Ejecución
+### 🔒 Arquitectura y Repositorio del Backend
+Por razones de seguridad, confidencialidad y protección de propiedad intelectual, el código fuente del servidor se encuentra alojado en un **repositorio privado**. El acceso está restringido exclusivamente al autor del proyecto y evaluadores externos autorizados.
 
-#### 1. Clonar el repositorio
-```bash
-git clone URL_DEL_REPOSITORIO
-```
+El núcleo de servicios se encuentra **desplegado y en ejecución en entornos de producción en la nube (Render)** bajo una arquitectura de microservicios independiente.
 
-#### 2. Ingresar al directorio del proyecto
-```bash
-cd contabilidad-frontend
-```
+Sin embargo, para fines de evaluación técnica, se detalla la pila tecnológica que compone el core del servidor:
+* 🖥️ **Entorno de Ejecución & Hosting:** Node.js / Desplegado en la nube a través de Render.
+* 🗄️ **Base de Datos:** PostgreSQL (Diseño relacional optimizado para la integridad de los datos contables).
+* 🛡️ **Seguridad:** Implementación de variables de entorno protegidas y mitigación de brechas de exposición en producción.
 
-#### 3. Instalar las dependencias
-```bash
-npm install
-```
+### 📂 Estructura del Repositorio Público
 
-#### 4. Configurar las variables de entorno
-Crea el archivo `.env.local` en la raíz del proyecto y agrega las variables requeridas por la aplicación.
-
-```env
-# Configuración de ejemplo
-# Agrega aquí las variables utilizadas por el proyecto.
-```
-
-Los nombres y valores deben corresponder a la configuración real de la aplicación. No publiques credenciales ni secretos.
-
-#### 5. Iniciar el servidor de desarrollo
-```bash
-npm run dev
-```
-
-Abre el navegador en: `http://localhost:3000`
-
-**Nota:** Los comandos anteriores corresponden a una configuración habitual de Next.js. Pueden requerir ajustes si el proyecto utiliza scripts o configuraciones diferentes.
-
-### 📂 Estructura del Proyecto
-
-La organización exacta depende de los archivos existentes en el repositorio. Una estructura de referencia para el frontend es:
+A diferencia del repositorio privado (que contiene el código fuente en `src/`, `package.json`, etc.), este repositorio público está estructurado únicamente para servir los archivos compilados y la documentación:
 
 ```text
-contabilidad-frontend/
-├── public/             # Recursos estáticos
-├── src/                # Código fuente, si está configurado
-│   ├── app/            # Rutas y páginas de Next.js
-│   ├── components/     # Componentes reutilizables
-│   ├── services/       # Integración con servicios y API
-│   └── types/          # Tipos e interfaces de TypeScript
-├── .env.local          # Variables de entorno locales
-├── .gitignore          # Archivos excluidos de Git
-├── package.json        # Dependencias y scripts
-├── package-lock.json   # Bloqueo de dependencias de npm
-├── tsconfig.json       # Configuración de TypeScript
+contabilidad-frontend-publico/
+├── chunks/             # Archivos estáticos compilados y ofuscados (JS/CSS)
+├── LICENSE             # Términos de licencia y derechos de autor
 └── README.md           # Documentación del proyecto
 ```
-
-*Esta estructura es ilustrativa y debe ajustarse a la organización real del repositorio.*
 
 ### 🔮 Objetivos de Evolución
 
@@ -135,9 +99,10 @@ contabilidad-frontend/
 
 ### 👨‍💻 Autor
 
-- **Creado por:** code-with-infinite
+- **Creado por:** [code-with-infinite](https://github.com/code-with-infinite)
 - **Perfil:** Desarrollador de Software
 - **Sistema:** Contabilidad Frontend (Aplicación Web Full-Stack)
+- © Todos los derechos reservados.
 
 ---
 
@@ -157,6 +122,11 @@ The system is designed to optimize the recording and control of income, expenses
 
 🔗 **[Test the live application here](https://contabilidad-frontend.onrender.com)**
 
+### 💡 Architecture and Security Note
+The original source code for this application is securely hosted in a private repository for confidentiality and intellectual property protection reasons. **This public repository contains only the compiled and obfuscated static assets of the application (the `chunks/` folder), the license, and this documentation.**
+
+Bundle obfuscation and minification are implemented as a standard deterrent measure to make reverse engineering harder, but they do not constitute an absolute cryptographic guarantee. Credentials, secrets, and sensitive logic reside exclusively in the backend. This repository is not reproducible, as it does not include the source code or configuration files required for compilation.
+
 ### 🚀 Project Status: In Development
 Currently, the project is in the development and stabilization phase, with an architecture focused on the separation of concerns between the frontend and system services. The solution aims to provide an intuitive, secure, and adaptable user experience tailored to accounting management needs.
 
@@ -166,10 +136,6 @@ Currently, the project is in the development and stabilization phase, with an ar
 - **Programming Language:** TypeScript, with static typing to improve maintainability and reduce errors.
 - **Styles & Interface:** Modern web design adaptable to different devices.
 - **Version Control:** Git and GitHub for tracking changes and development collaboration.
-
-### 🔗 Backend Repository
-To review the server logic, PostgreSQL database management, and the endpoints consumed by this interface, access the server repository:
-* ⚙️ **Backend (Node.js):** [Link to Node.js repository](https://github.com/code-with-infinite/contabilidad-backend.git)
 
 ### 💡 Key Features
 - **📈 Income Management:** Recording and control of income to facilitate tracking of financial operations.
@@ -191,62 +157,32 @@ This organization facilitates:
 - Scalability of the solution as new accounting modules are incorporated.
 
 ### ⚙️ Configuration and Security
-- **🔐 Environment Variables:** Use of `.env.local` files to configure necessary variables in the development environment.
+- **🔐 Environment Variables:** Use of `.env.local` files to configure necessary variables in the private development environment. In Next.js, client-exposed variables (prefixed with `NEXT_PUBLIC_`) are public, so they must not contain secrets. Actual credentials are securely managed in the backend.
 - **🛡️ Credentials Protection:** Exclusion of files with sensitive information via `.gitignore`.
 - **🔗 Backend Integration:** Configuration of API and service addresses according to the execution environment.
-- **📦 Dependency Management:** Use of npm and the dependency lock file to facilitate consistent installations.
+- **📦 Dependency Management:** Use of npm and the dependency lock file to facilitate consistent installations in the private development environment.
 - **🌿 Version Control:** Use of Git and GitHub to maintain an organized history of changes.
 
-> **Important:** Credentials, private keys, passwords, and sensitive configuration files must not be published in public repositories. Production configuration should be managed through secure environment variables.
+> **Important:** Credentials, private keys, passwords, and sensitive configuration files must not be published in public repositories. Production configuration should be managed through secure server-level environment variables.
 
-### ▶️ Installation and Execution
+### 🔒 Backend Architecture and Repository
+For security, confidentiality, and intellectual property protection reasons, the server source code is hosted in a **private repository**. Access is strictly restricted to the project author and authorized external evaluators.
 
-#### 1. Clone the repository
-```bash
-git clone REPOSITORY_URL
-```
+The core services are **deployed and running in cloud production environments (Render)** under an independent microservices architecture.
 
-#### 2. Navigate to the project directory
-```bash
-cd contabilidad-frontend
-```
+However, for technical evaluation purposes, the technology stack making up the server core is outlined below:
+* 🖥️ **Runtime Environment & Hosting:** Node.js / Cloud deployment through Render.
+* 🗄️ **Database:** PostgreSQL (Relational design optimized for accounting data integrity).
+* 🛡️ **Security:** Implementation of protected environment variables and mitigation of production exposure risks.
 
-#### 3. Install dependencies
-```bash
-npm install
-```
+### 📂 Public Repository Structure
 
-#### 4. Configure environment variables
-Create the `.env.local` file in the project root and add the variables required by the application.
-
-```env
-# Example configuration
-# Add the variables used by the project here.
-```
-
-Names and values must correspond to the actual application configuration. Do not publish credentials or secrets.
-
-#### 5. Start the development server
-```bash
-npm run dev
-```
-
-Open your browser at: `http://localhost:3000`
-
-### 📂 Project Structure
-A reference structure for the frontend is:
+Unlike the private repository (which contains the source code in `src/`, `package.json`, etc.), this public repository is structured solely to serve the compiled files and documentation:
 
 ```text
-contabilidad-frontend/
-├── public/             # Static resources
-├── src/                # Source code
-│   ├── app/            # Next.js routes and pages
-│   ├── components/     # Reusable components
-│   ├── services/       # API and services integration
-│   └── types/          # TypeScript types and interfaces
-├── .env.local          # Local environment variables
-├── .gitignore          # Files ignored by Git
-├── package.json        # Dependencies and scripts
+contabilidad-frontend-publico/
+├── chunks/             # Compiled and obfuscated static assets (JS/CSS)
+├── LICENSE             # License terms and copyright
 └── README.md           # Project documentation
 ```
 
@@ -259,6 +195,7 @@ contabilidad-frontend/
 - Reinforce security and code maintainability practices.
 
 ### 👨‍💻 Author
-- **Created by:** code-with-infinite
+- **Created by:** [code-with-infinite](https://github.com/code-with-infinite)
 - **Profile:** Software Developer
 - **System:** Accounting Frontend (Full-Stack Web Application)
+- © All rights reserved.
